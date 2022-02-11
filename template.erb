@@ -29,8 +29,14 @@
                         <% if (c[:lastName] || c[:firstName]) %>
                             <%= c[:firstName] %>, <%= c[:lastName] %>
                         <% end %>
-                        <% if (c[:city] || c[:state]) %>
-                            from <%= c[:city] %>, <%= c[:state] %>
+                        <% if (c[:city]) %>
+                            from <%= c[:city] %>
+                        <% end %>
+                        <% if (c[:state]) %>
+                            <%= c[:state] %>
+                        <% end %>
+                        <% if (c[:country] != "United States") %>
+                            <%= c[:country] %>
                         <% end %>
                     </td>
 
