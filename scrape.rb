@@ -5,6 +5,7 @@ require 'json'
 
 API_KEY = ARGV[1] || "DEMO_KEY"
 
+# TODO: add rate limiting. 1000 requests per hour
 def reggov_request(endpoint, params={})
     uri = URI("https://api.regulations.gov/v4/" + endpoint)
     uri.path.gsub!('//', '/') # allow caller to either omit or include leading slash in endpoint
