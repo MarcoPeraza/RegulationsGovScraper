@@ -1,0 +1,57 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+<title></title>
+</head>
+<body>
+    <% tableid = 0 %>
+    <% documents.each do |doc| %>
+        <h1>Comments on <%= doc[:id] %> - <%= doc[:title] %></h1>
+        <% tableid += 1 %>
+        <table id="table<%= tableid %>" class="display">
+            <thead>
+            <tr>
+                <th>Organization</th>
+                <th>Name</th>
+                <th>Files</th>
+                <th>Comment</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% doc[:comments].each do |c| %>
+                <tr>
+                    <td><%= c[:organization] %></td>
+
+                    <td>
+                        <% if (c[:lastName] || c[:firstName]) %>
+                            <%= c[:firstName] %>, <%= c[:lastName] %>
+                        <% end %>
+                        <% if (c[:city] || c[:state]) %>
+                            from <%= c[:city] %>, <%= c[:state] %>
+                        <% end %>
+                    </td>
+
+                    <td>
+                        <% c[:attachments]&.each do |attachment| %>
+                            <%= attachment[:title] %>
+                            <% attachment[:urls].each do |url| %>
+                                <a href="<%=url%>">[<%= File.extname(url) %>]</a>
+                            <% end %>
+                            <br />
+                        <% end %>
+                    </td>
+                    <td><%= c[:comment] %></td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            let table = new DataTable('#table<%= tableid %>', {
+                "paging": false
+            });
+        </script>
+    <% end %>
+</body>
+</html>
