@@ -10,6 +10,7 @@
     <% documents.each do |doc| %>
         <h1>Comments on <%= doc[:id] %> - <%= doc[:title] %></h1>
         <% tableid += 1 %>
+        Click column headings to sort
         <table id="table<%= tableid %>" class="display">
             <thead>
             <tr>
