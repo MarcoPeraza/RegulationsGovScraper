@@ -14,7 +14,7 @@
         <table id="table<%= tableid %>" class="display">
             <thead>
             <tr>
-                <th>Organization</th>
+                <th>Type</th>
                 <th>Name</th>
                 <th>Files</th>
                 <th>Comment</th>
@@ -23,20 +23,26 @@
             <tbody>
             <% doc[:comments].each do |c| %>
                 <tr>
-                    <td><%= c[:organization] %></td>
-
+                    <td>
+                        <% if (c[:lastname] || c[:firstName]) %>
+                            Type_Person
+                        <% elsif (c[:organization]) %>
+                            Type_Org
+                        <% else %>
+                            Type_Unknown
+                        <% end %>
+                    </td>
                     <td>
                         <% if (c[:lastName] || c[:firstName]) %>
-                            <%= c[:firstName] %>, <%= c[:lastName] %>
+                            <%= c[:lastName] %>, <%= c[:firstName] %>
                         <% end %>
-                        <% if (c[:city]) %>
-                            from <%= c[:city] %>
+
+                        <% if (c[:organization]) %>
+                            <%= c[:organization] %>
                         <% end %>
-                        <% if (c[:state]) %>
-                            <%= c[:state] %>
-                        <% end %>
-                        <% if (c[:country] != "United States") %>
-                            <%= c[:country] %>
+
+                        <% if (c[:city] || c[:state] || c[:country]) %>
+                            from <%= c[:city] %>, <%= c[:state] %>, <%= c[:country] %>
                         <% end %>
                     </td>
 
