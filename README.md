@@ -1,16 +1,27 @@
 # Regulation Comment Scraper
 
-## Usage
+## Step 1 & 2 Combined
+
+`scrape.rb DOCKET_ID [API_KEY] | make_html.rb`
+
+## Step 1: Scrape
+
+scrape.rb queries the regulations.gov API to download the metadata of all the comments on a particular docket. It outputs JSON.
+
 `scrape.rb DOCKET_ID [API_KEY]`
 
 Example:\
 `scrape.rb NIST-2021-0007 NotARealKeyw89dJAKDjf93NotARealKey`
 
-## Output
+JSON is saved to `comments_[timestamp].json`
 
-JSON output is written to comments_[timestamp].json \
-Then, to generate HTML table: `make_html.rb comments_[timestamp].json` \
-Or all in one step: `scrape.rb DOCKET_ID [API_KEY] | make_html.rb`
+## Step 2: Generate HTML
+
+make_html.rb generates HTML from the specified JSON file. Can also be chained from scrape.rb (see above)
+
+`make_html.rb comments_[timestamp].json`
+
+The HTML document is saved to `comments_[timestamp].json.html`
 
 ## API Key
 
@@ -24,6 +35,9 @@ Request a key at https://open.gsa.gov/api/regulationsgov/
 - No rate-limiting on API calls
 
 ## Authorship
+
 Created by Marco A. Peraza
+
+HTML output uses jQuery and DataTables.
 
 Not an official work of the US government.
