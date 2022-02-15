@@ -10,7 +10,7 @@ Example:\
 
 JSON output is written to comments_[timestamp].json \
 Then, to generate HTML table: `make_html.rb comments_[timestamp].json` \
-Or all in one step: `scrape.rb DOCKET_ID [API_KEY] | make_html.rb` \
+Or all in one step: `scrape.rb DOCKET_ID [API_KEY] | make_html.rb`
 
 ## API Key
 
