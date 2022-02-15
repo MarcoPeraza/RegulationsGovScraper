@@ -3,6 +3,25 @@ require 'uri'
 require 'net/http'
 require 'json'
 
+if (ARGV.length == 0 || ARGV.length > 2 || ["-h", "--help", "-?", "/?"].include?(ARGV[0]))
+    puts "ERROR: Invalid parameters"
+    puts ""
+    puts "Usage: scrape.rb DOCKET_ID [API_KEY]"
+    puts "Example: scrape.rb NTIA-2021-0002 gjekwWKTJD1289dJAKDjf93"
+    puts "                                     (not a valid API key)"
+    puts ""
+    puts "JSON output is written to comments_[timestamp].json"
+    puts "To generate HTML table: make_html.rb comments_[timestamp].json"
+    puts "In one step: scrape.rb DOCKET_ID [APID_KEY] | make_html.rb"
+    puts ""
+    puts "Without an API key, application will hang at under 30 comments retrieved."
+    puts "Request a key at https://open.gsa.gov/api/regulationsgov/"
+    puts ""
+    puts "This software has no affiliation with the United States government."
+    exit 1
+end
+
+
 API_KEY = ARGV[1] || "DEMO_KEY"
 
 # TODO: add rate limiting. 1000 requests per hour
