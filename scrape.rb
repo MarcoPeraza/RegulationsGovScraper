@@ -7,7 +7,7 @@ if (ARGV.length == 0 || ARGV.length > 2 || ["-h", "--help", "-?", "/?"].include?
     puts "ERROR: Invalid parameters"
     puts ""
     puts "Usage: scrape.rb DOCKET_ID [API_KEY]"
-    puts "Example: scrape.rb NTIA-2021-0002 gjekwWKTJD1289dJAKDjf93"
+    puts "Example: scrape.rb NIST-2021-0007 gjekwWKTJD1289dJAKDjf93"
     puts "                                     (not a valid API key)"
     puts ""
     puts "JSON output is written to comments_[timestamp].json"
