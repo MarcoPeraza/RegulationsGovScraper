@@ -11,13 +11,12 @@ if (ARGV.length == 0 || ARGV.length > 2 || ["-h", "--help", "-?", "/?"].include?
     puts "                                     (not a valid API key)"
     puts ""
     puts "JSON output is written to comments_[timestamp].json"
-    puts "To generate HTML table: make_html.rb comments_[timestamp].json"
-    puts "In one step: scrape.rb DOCKET_ID [APID_KEY] | make_html.rb"
+    puts "Then, to generate HTML table: make_html.rb comments_[timestamp].json"
+    puts "Or all in one step: scrape.rb DOCKET_ID [APID_KEY] | make_html.rb"
     puts ""
     puts "Without an API key, application will hang at under 30 comments retrieved."
     puts "Request a key at https://open.gsa.gov/api/regulationsgov/"
     puts ""
-    puts "This software has no affiliation with the United States government."
     exit 1
 end
 
@@ -88,10 +87,10 @@ def get_comment(comment_id)
 end
 
 def progress(current, target)
-    print "\r"
+    STDERR.print "\r"
     pad_to = target.to_s.length
-    print "#{current.to_s.rjust(pad_to, "0")} of #{target}"
-    $stdout.flush
+    STDERR.print "#{current.to_s.rjust(pad_to, "0")} of #{target}"
+    STDERR.flush
 end
 
 docket_id = ARGV[0]
@@ -101,7 +100,7 @@ documents.each do |d|
     d[:comments] = get_comments(d[:object_id])
 
     num_comments = d[:comments].length
-    puts "Getting #{num_comments} comments for document #{d[:id]} - #{d[:title]}"
+    STDERR.puts "Getting #{num_comments} comments for document #{d[:id]} - #{d[:title]}"
 
     cur = 1
     d[:comments].map! do |c|
@@ -109,9 +108,13 @@ documents.each do |d|
         cur += 1
         get_comment(c)
     end
-    print "\n"
+    STDERR.print "\n"
 end
 
 output_json = JSON.pretty_generate(documents)
+output_filename = File.expand_path("comments_#{Time.now.to_i}.json")
 
-File.write("comments_#{Time.now.to_i}.json", output_json)
+File.write(output_filename, output_json)
+
+STDERR.puts "Comment data saved to: #{output_filename}\n"
+puts output_filename unless STDOUT.tty?
