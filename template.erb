@@ -14,6 +14,7 @@
         <table id="table<%= tableid %>" class="display">
             <thead>
             <tr>
+                <th>ID</th>
                 <th>Type</th>
                 <th>Name</th>
                 <th>Files</th>
@@ -23,6 +24,7 @@
             <tbody>
             <% doc[:comments].each do |c| %>
                 <tr>
+                    <td><%= c[:id].sub(/.*-(.+)/, '\1') %>
                     <td>
                         <% if (c[:lastname] || c[:firstName]) %>
                             Type_Person
