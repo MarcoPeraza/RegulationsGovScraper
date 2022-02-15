@@ -52,7 +52,6 @@ def get_comments(object_id)
     while true
         # Do not remove sort field, will cause duplicates
         response = reggov_request("/comments", "filter[commentOnId]" => object_id,
-                                               "api_key" => API_KEY,
                                                "page[size]" => 250,
                                                "page[number]" => page_number,
                                                "sort" => "lastModifiedDate" )
