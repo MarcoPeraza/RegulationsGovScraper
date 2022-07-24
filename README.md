@@ -34,10 +34,8 @@ Request a key at https://open.gsa.gov/api/regulationsgov/
 - Does not correctly handle documents with more than 5000 comments
 - No rate-limiting on API calls
 
-## Authorship
+## License
 
-Created by Marco A. Peraza
-
-HTML output uses jQuery and DataTables.
+Public domain.
 
 Not an official work of the US government.
