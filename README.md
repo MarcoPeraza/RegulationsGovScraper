@@ -37,5 +37,3 @@ Request a key at https://open.gsa.gov/api/regulationsgov/
 ## License
 
 Public domain.
-
-Not an official work of the US government.
